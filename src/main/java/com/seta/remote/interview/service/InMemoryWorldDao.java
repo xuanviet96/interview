@@ -4706,6 +4706,40 @@ public class InMemoryWorldDao implements WorldDao {
         countries.put("ZWE", new Country("ZWE", "Zimbabwe", "Africa", 11669000,
                 390757.00, 5951.00, 4068));
     }
+    public  List<Country> getCountryByContient(String contient) {
+        List<Country> result = new ArrayList<>();
+        for(Country country : countries.values()) {
+            if(country.getContinent().equals(contient)) {
+                result.add(country);
+            }
+        }
+        return result;
+    }
+    public void showCountry(String countryCode) {
+        Country country = this.countries.get(countryCode);
+        List<City> cities = country.getCities();
+        int sum =0;
+        int maxPopulation = 0;
+        City currentCity = new City();
+        for(City city : cities) {
+            sum += city.getPopulation();
+            System.out.println(city.getName() + city.getPopulation());
+            if( maxPopulation < city.getPopulation()) {
+                maxPopulation = city.getPopulation();
+                currentCity = city;
+            }
+        }
+        System.out.println("city with max population" + currentCity.getName());
+        System.out.println("total:" + sum);
+    }
+    private static InMemoryWorldDao instance;
+    public static InMemoryWorldDao getInstance() {
+        synchronized (InMemoryWorldDao.class) {
+            if (instance == null)
+                instance = new InMemoryWorldDao();
+        }
+        return instance;
+    }
 
     @Override
     public Country findCountryByCode(String code) {

@@ -33,7 +33,7 @@ public class Product {
 	
 	@ManyToMany(mappedBy = "products", fetch = FetchType.EAGER)
 	@ToString.Exclude
-	 @EqualsAndHashCode.Exclude
+	@EqualsAndHashCode.Exclude
 	private Set<Order> orders;
 	
 }

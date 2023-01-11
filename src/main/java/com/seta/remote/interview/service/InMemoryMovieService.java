@@ -18,7 +18,10 @@ public class InMemoryMovieService implements MovieService {
     private Map<Integer, Movie> movies;
     private Map<Integer, Genre> genres;
     private Map<Integer, Director> directors;
-
+    private static final MovieService instance = new InMemoryMovieService();
+    public static MovieService getInstance() {
+        return instance;
+    }
     public InMemoryMovieService() {
         movies = new ConcurrentHashMap<>();
         genres = new ConcurrentHashMap<>();
